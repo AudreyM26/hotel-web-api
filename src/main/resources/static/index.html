@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-tofit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<title>Accueil-Réservations</title>
+</head>
+<body onload="afficheListeClients();AfficheChambres()">
+	<!-- TODO -->
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+
+	<main>
+	<div class="container mt-3">
+		<div class="row mb-2">
+			<div class="col-md-4 mt-sm-4">
+				<h2>Réservations</h2>
+			</div>
+		</div>
+		<form id="newReservation">
+			<div class="row">
+				<div class="col-md-5 text-md-right">
+					<label for="clients">Liste de clients :</label>
+				</div>
+				<div class="col-md-3">
+					<select name="clients" id="clients" class="form-control">
+						<option value="">---------------</option>
+					</select>
+				</div>
+			</div>
+			<div class="row mb-2 pt-2">
+				<div class="col-md-5 text-md-right">
+					<label for="dateDebut">Date de début :</label>
+				</div>
+				<div class="col-md-3">
+					<input type="date" class="form-control" id="dateDebut"  name="dateDebut" value="">
+				</div>
+			</div>
+			<div class="row mb-2 pt-2">
+				<div class="col-md-5 text-md-right">
+					<label for="dateFin">Date de fin :</label>
+				</div>
+				<div class="col-md-3">
+					<input type="date" class="form-control" id="dateFin"  name="dateFin" value="">
+				</div>
+			</div>
+			<div class="row mb-2 pt-2">
+				<div class="col-md-5 text-md-right">
+					<label for="hotel">Hotel :</label>
+				</div>
+				<div class="col-md-3">
+					<span id="hotel"></span>
+				</div>
+			</div>
+			<div class="row mb-2 pt-2">
+				<div class="col-md-5 text-md-right">
+					<labefor="rech">Les chambres :</label>
+				</div>
+				<div class="col-md-3">
+					<div id="divChambres" class=" pl-4">
+					
+					</div>
+				
+				</div>
+			</div>
+			<div class="row mb-2 pt-2">
+	           	<div class="col-md-7 text-md-right">
+	                <button type="button" class="btn btn-success" id="ajout" onclick="ajouterReservation()">Réserver</button>
+	            </div>
+            </div>
+		</form>
+	</div>
+	</main>
+	<script type="text/javascript" src="index.js"></script>
+</body>
+</html>
