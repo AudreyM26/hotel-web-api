@@ -76,9 +76,9 @@ public class Reservation extends BaseEntite {
 		String uuidChambres ="";
 		for(Chambre ch : this.getChambres()){
 		
-			uuidChambres += ch.getUuid().toString()+",";
+			uuidChambres += ch.getUuid().toString()+"\n";
 		}
-		String message = "reservation n "+this.getUuid()+" client : "+this.getClient().getNom()+" "+this.getClient().getPrenoms()+" période : "+this.getDateDebut()+" - "+this.getDateFin()+" chambres : "+uuidChambres;
+		String message = "\nreservation n "+this.getUuid()+"\nclient : "+this.getClient().getNom()+" "+this.getClient().getPrenoms()+"\npériode : "+this.getDateDebut()+" - "+this.getDateFin()+"\nchambres : "+uuidChambres;
 		return message;
 	}
 }

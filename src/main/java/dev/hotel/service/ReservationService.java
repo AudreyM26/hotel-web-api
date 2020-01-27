@@ -50,7 +50,7 @@ public class ReservationService {
 									.orElseThrow(() -> new EntityNotFoundException("la chambre " + chambreId + " n'existe pas")))
 							.collect(Collectors.toList()));
 			
-			message = "La réservation est enregistré : "+resa.toString();
+			message = "La réservation est enregistrée";
 			this.reservationRepository.save(resa);
 		}else{
 			message = "La date de fin doit être supérieure à la date du début";
