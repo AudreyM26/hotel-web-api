@@ -154,8 +154,11 @@ function ajouterReservation(){
 	
 	if(bool===true){
 		
+		var urlCourante = document.location.href;
+		urlCourante = urlCourante.substring(0,urlCourante.lastIndexOf("/"));
+		
 		console.log("chambre "+listeChambres);
-		fetch('http://localhost:8080/reservations', {
+		fetch(urlCourante+'/reservations', {
             method: 'post',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
