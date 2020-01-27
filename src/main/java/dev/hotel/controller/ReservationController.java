@@ -1,5 +1,6 @@
 package dev.hotel.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +32,6 @@ public class ReservationController {
 	private ReservationRepository reservationRepository;
 	private ClientRepository clientRepository;
 	private ChambreRepository chambreRepository;
-	
-	
 	
 	public ReservationController(ReservationRepository reservationRepository, ClientRepository clientRepository,
 			ChambreRepository chambreRepository) {
@@ -112,5 +112,42 @@ public class ReservationController {
 		}
 
 		return liste;
+	}
+	
+	
+	// Cette méthode est exécutée lorsqu'une requête GET /reservations
+	@RequestMapping(method = RequestMethod.GET,params={"dateDebut","dateFin","chambres"})
+	@ResponseBody
+	public boolean reservationsExist(@RequestParam("dateDebut") String dateDebutHttp ,@RequestParam("dateFin") String dateFinHttp, @RequestParam("chambres") List<UUID> chambresHttp)  {
+		
+		Boolean exist=false;
+		LocalDate dateDebut = LocalDate.parse(dateDebutHttp);
+		LocalDate dateFin = LocalDate.parse(dateFinHttp);
+		
+		List<Chambre> listeChambres = new ArrayList<>();
+		
+		
+		for(UUID idCh : chambresHttp){
+			if(this.chambreRepository.existsById(idCh)){
+				
+				Chambre chambre = this.chambreRepository.findById(idCh)
+						.orElseThrow(() -> new EntityNotFoundException("Chambre non trouvée"));
+				
+				listeChambres.add(chambre);
+			}
+		}
+		System.out.println(listeChambres.size());
+		List<Reservation> resa = this.reservationRepository.findByDateDebutAndDateFin(dateDebut, dateFin,listeChambres);
+		
+		/*if(resa.size() > 0){
+			exist=true;
+		}*/
+		
+		//if (resa.l) {
+			//liste = bthis.reservationRepository.findAll((Sort.by(Sort.Direction.ASC, "dateDebut")));
+			//exist =true;
+		//}
+
+		return exist;
 	}
 }
