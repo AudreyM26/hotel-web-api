@@ -4,13 +4,23 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+
 public class ReservationJson {
 
+	@Future
+	@NotNull
 	private LocalDate dateDebut;
+	
+	@Future
+	@NotNull
 	private LocalDate dateFin;
+	
+	@NotNull
 	private UUID clientId;
 	
-	private List<UUID> chambres;
+	private List<@NotNull UUID> chambres;
 
 	/**
 	 * @return the dateDebut

@@ -71,4 +71,14 @@ public class Reservation extends BaseEntite {
 	public void setChambres(List<Chambre> chambres) {
 		this.chambres = chambres;
 	}
+	
+	public String toString(){
+		String uuidChambres ="";
+		for(Chambre ch : this.getChambres()){
+		
+			uuidChambres += ch.getUuid().toString()+",";
+		}
+		String message = "reservation n "+this.getUuid()+" client : "+this.getClient().getNom()+" "+this.getClient().getPrenoms()+" période : "+this.getDateDebut()+" - "+this.getDateFin()+" chambres : "+uuidChambres;
+		return message;
+	}
 }

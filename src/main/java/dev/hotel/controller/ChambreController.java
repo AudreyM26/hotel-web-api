@@ -1,39 +1,29 @@
 package dev.hotel.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.hotel.entite.Chambre;
-import dev.hotel.repository.ChambreRepository;
+import dev.hotel.service.ChambreService;
 
 @RestController
 @RequestMapping(value = "/chambres")
 public class ChambreController {
 
-	private ChambreRepository chambreRepository;
+	private ChambreService chambreService;
 
-	public ChambreController(ChambreRepository chambreRepository) {
+	public ChambreController(ChambreService chambreService) {
 		super();
-		this.chambreRepository = chambreRepository;
+		this.chambreService = chambreService;
 	}
 
-	// Cette méthode est exécutée lorsqu'une requête GET /clients est reçue
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public List<Chambre> listeChambres() {
-
-		List<Chambre> liste = new ArrayList<>();
-
-		if (this.chambreRepository.findAll().size() > 0) {
-			liste = this.chambreRepository.findAll((Sort.by(Sort.Direction.ASC, "numero")));
-		}
-
-		return liste;
+	// Cette méthode est exécutée lorsqu'une requête GET /chambres est reçue
+	@GetMapping
+	public List<Chambre> listerChambres() {
+		return this.chambreService.listerChambres();
 	}
 }
