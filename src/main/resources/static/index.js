@@ -158,8 +158,10 @@ function ajouterReservation(){
             },
             body: JSON.stringify({ dateDebut:dateDebut, dateFin:dateFin, clientId:idClient, chambres:listeChambres})
 		}).then(res => res.text())  
-			.then(text => console.log(text));   
-        
+		.then(text => {
+			$('#confirmModal').modal('show');
+			document.getElementById("resa_controller").innerHTML=text;  
+		})  
 	}
 	
 }
