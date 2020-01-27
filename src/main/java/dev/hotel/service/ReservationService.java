@@ -44,22 +44,31 @@ public class ReservationService {
 			resa.setDateDebut(dateDebut);
 			resa.setDateFin(dateFin);
 			resa.setClient(clientRepository.findById(clientId).orElseThrow(() -> new EntityNotFoundException("client non trouvé")));
-			resa.setChambres(
-					chambresId.stream()
-							.map(chambreId -> chambreRepository.findById(chambreId)
-									.orElseThrow(() -> new EntityNotFoundException("la chambre " + chambreId + " n'existe pas")))
-							.collect(Collectors.toList()));
 			
-			message = "La réservation est enregistrée";
-			this.reservationRepository.save(resa);
+			List<Chambre> listeChambres = chambresId.stream()
+					.map(chambreId -> chambreRepository.findById(chambreId)
+							.orElseThrow(() -> new EntityNotFoundException("la chambre " + chambreId + " n'existe pas")))
+					.collect(Collectors.toList());
+					
+			resa.setChambres(listeChambres);
+	
+			if(this.reservationRepository.findByDateDebutAndDateFin(dateDebut, dateFin,listeChambres)){
+				message = "Les chambres sont déjà réservées à ces dates";
+			}else{
+				message = "La réservation est enregistrée";
+				this.reservationRepository.save(resa);
+			}
+			
 		}else{
 			message = "La date de fin doit être supérieure à la date du début";
 		}
 		return message;
+		
 		
 	}
 	
 	public List<Reservation> listerReservations() {
 		return this.reservationRepository.findAll((Sort.by(Sort.Direction.ASC, "dateDebut")));
 	}
+
 }

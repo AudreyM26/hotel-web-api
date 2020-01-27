@@ -128,7 +128,7 @@ function ajouterReservation(){
 		}
 	}
 	
-	if(listeChambres===""){
+	if(listeChambres.length === 0 ){
 		listeElementManquant = listeElementManquant+"- chambre(s)\n";
 		bool=false;
 	}

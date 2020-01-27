@@ -35,7 +35,7 @@ import dev.hotel.service.ReservationService;
 public class ReservationController {
 
 	private ReservationService reservationService;
-	
+
 	public ReservationController(ReservationService reservationService) {
 		super();
 		this.reservationService = reservationService;
@@ -43,16 +43,17 @@ public class ReservationController {
 
 	// POST /reservations
 	@PostMapping
-	public ResponseEntity<String> creerReservation (@RequestBody @Valid ReservationJson reservationJson) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(this.reservationService.creerReservation(reservationJson.getDateDebut(),
-				reservationJson.getDateFin(), reservationJson.getChambres(), reservationJson.getClientId()));
+	public ResponseEntity<String> creerReservation(@RequestBody @Valid ReservationJson reservationJson) {
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(this.reservationService.creerReservation(reservationJson.getDateDebut(),
+						reservationJson.getDateFin(), reservationJson.getChambres(), reservationJson.getClientId()));
 	}
-	
+
 	@ExceptionHandler(value = { EntityNotFoundException.class })
 	public ResponseEntity<String> reservationPresent(EntityNotFoundException exception) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("erreur " + exception.getMessage());
 	}
-	
+
 	// GET /reservations
 	@GetMapping
 	public List<Reservation> listerReservations() {
