@@ -4,10 +4,7 @@
 
 function afficheListeClients() {
 	
-	var urlCourante = document.location.href;
-	urlCourante = urlCourante.substring(0,urlCourante.lastIndexOf("/"));
-
-    fetch(urlCourante+'/clients')
+    fetch('/clients')
         .then(function (response) {
             // traiter la réponse
             if (!response.ok) {
@@ -44,10 +41,8 @@ function afficheListeClients() {
 
 
 function AfficheChambres(){
-	var urlCourante = document.location.href;
-	urlCourante = urlCourante.substring(0,urlCourante.lastIndexOf("/"));
-	
-    fetch(urlCourante+'/chambres')
+
+    fetch('/chambres')
     .then(function (response) {
         // traiter la réponse
         if (!response.ok) {
@@ -153,20 +148,17 @@ function ajouterReservation(){
 	}
 	
 	if(bool===true){
-		
-		var urlCourante = document.location.href;
-		urlCourante = urlCourante.substring(0,urlCourante.lastIndexOf("/"));
-		
 		console.log("chambre "+listeChambres);
-		fetch(urlCourante+'/reservations', {
+		
+		fetch('/reservations', {
             method: 'post',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ dateDebut:dateDebut, dateFin:dateFin, clientId:idClient, chambres:listeChambres})
-        }).then(res => res.json())
-            .then(res => console.log(res));
+		}).then(res => res.text())  
+			.then(text => console.log(text));   
         
 	}
 	
