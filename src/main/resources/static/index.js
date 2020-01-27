@@ -3,7 +3,11 @@
  */
 
 function afficheListeClients() {
-    fetch('http://localhost:8080/clients')
+	
+	var urlCourante = document.location.href;
+	urlCourante = urlCourante.substring(0,urlCourante.lastIndexOf("/"));
+
+    fetch(urlCourante+'/clients')
         .then(function (response) {
             // traiter la réponse
             if (!response.ok) {
@@ -40,7 +44,10 @@ function afficheListeClients() {
 
 
 function AfficheChambres(){
-    fetch('http://localhost:8080/chambres')
+	var urlCourante = document.location.href;
+	urlCourante = urlCourante.substring(0,urlCourante.lastIndexOf("/"));
+	
+    fetch(urlCourante+'/chambres')
     .then(function (response) {
         // traiter la réponse
         if (!response.ok) {
