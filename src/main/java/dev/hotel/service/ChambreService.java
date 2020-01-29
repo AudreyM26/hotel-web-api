@@ -1,5 +1,6 @@
 package dev.hotel.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
@@ -20,6 +21,10 @@ public class ChambreService {
 	
 	public List<Chambre> listerChambres() {
 		return this.chambreRepository.findAll((Sort.by(Sort.Direction.ASC, "numero")));
+	}
+	
+	public List<Chambre> listerChambresDispos(LocalDate dateDebut, LocalDate dateFin){
+		return this.chambreRepository.findByChambresDispos(dateDebut,dateFin);
 	}
 
 }

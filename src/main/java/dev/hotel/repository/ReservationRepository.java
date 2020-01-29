@@ -13,7 +13,7 @@ import dev.hotel.entite.Chambre;
 
 public interface ReservationRepository extends JpaRepository<Reservation, UUID> {
 
-	@Query("select case when (count(*) >0) then true else false end from Reservation r inner join r.chambres c where date_debut <= :dateFin and date_fin >= :dateDebut and c in (:chambres)")
+	@Query("select case when (count(*) >0) then true else false end from Reservation r inner join r.chambres c where date_debut <= :dateFin and date_fin >= :dateDebut  and c in (:chambres)")
 	Boolean findByDateDebutAndDateFin(@Param("dateDebut") LocalDate dateDebut,
 			@Param("dateFin") LocalDate dateFin, @Param("chambres") List<Chambre> chambres);
 

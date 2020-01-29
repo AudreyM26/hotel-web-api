@@ -25,14 +25,15 @@ public class ClientService {
 	}
 
 	public List<Client> rechercherClientsParNom(String nomRequete) {
-		return this.clientRepository.findByNom(nomRequete.toUpperCase());
+		return this.clientRepository.findByNom(nomRequete);
 	}
-
+	
 	public UUID creerClient(Client clientRecu) {
+		clientRecu.setNom(clientRecu.getNom().toUpperCase());
 		if (this.clientRepository.existsByNomAndPrenoms(clientRecu.getNom(), clientRecu.getPrenoms())) {
 			throw new EntityExistsException();
 		}
-
+		
 		return this.clientRepository.save(clientRecu).getUuid();
 	}
 }
