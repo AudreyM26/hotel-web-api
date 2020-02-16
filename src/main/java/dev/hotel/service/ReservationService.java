@@ -1,7 +1,6 @@
 package dev.hotel.service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -9,13 +8,10 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import dev.hotel.entite.Chambre;
 import dev.hotel.entite.Reservation;
-import dev.hotel.entite.ReservationJson;
 import dev.hotel.repository.ChambreRepository;
 import dev.hotel.repository.ClientRepository;
 import dev.hotel.repository.ReservationRepository;
